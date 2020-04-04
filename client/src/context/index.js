@@ -11,6 +11,8 @@ const reducer = (state, action) => {
       return { ...state, patient: action.payload };
     case "fetchAdvisory":
       return { ...state, advisory: action.payload };
+    case "setMessage":
+      return { ...state, message: action.payload };
     default:
       return state;
   }
@@ -20,6 +22,7 @@ export const Provider = ({ children }) => {
     profile: null,
     patient: null,
     advisory: null,
+    message: "",
   });
 
   const fetchProfile = async () => {
@@ -41,6 +44,9 @@ export const Provider = ({ children }) => {
       Object.keys(list).map((e) => parseInt(e))
     );
   };
+  const setMessage = (message) => {
+    dispatch({ type: "setMessage", payload: message });
+  };
 
   return (
     <Context.Provider
@@ -50,6 +56,7 @@ export const Provider = ({ children }) => {
         fetchPatient,
         fetchAdvisory,
         submitPatient,
+        setMessage,
       }}
     >
       {children}

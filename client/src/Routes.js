@@ -8,6 +8,7 @@ import Context from "./context";
 import Login from "./components/Login";
 import HandleLogin from "./components/HandleLogin";
 import SignUp from "./components/signup";
+import Message from "./components/Message";
 
 const Routes = () => {
   const { profile } = useContext(Context);
@@ -26,6 +27,7 @@ const Routes = () => {
       <Route path="/checkContact" component={ContactDetail} />
       <Route path="/testingEligibility" component={TestingEligibility} />
       <Route path="/followUp" component={FollowUp} />
+      <Route path="/message" component={Message} />
       <Advisories />
     </Switch>
   );

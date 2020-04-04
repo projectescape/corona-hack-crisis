@@ -118,7 +118,11 @@ const Eligibility = sequelize.define("eligibility", {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
-  cough: {
+  dryCough: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
+  wetCough: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
@@ -152,7 +156,11 @@ const Follow = sequelize.define("follow", {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
-  cough: {
+  dryCough: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
+  wetCough: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },

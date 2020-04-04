@@ -19,7 +19,7 @@ const Advisories = () => {
           >
             <img
               className="card-img-top cardImage"
-              src="images/advisories/virus.png"
+              src={advisory.image}
               alt="Card image cap"
             />
             <div className="card-body">
@@ -38,6 +38,9 @@ const Advisories = () => {
         <h3 className="mb-4" style={{ color: "#6E7AFA", textAlign: "center" }}>
           Advisories
         </h3>
+        <p style={{ fontWeight: "bold", color: "black" }}>
+          Corona Virus Live Updates
+        </p>
         {renderCards()}
       </div>
     </div>

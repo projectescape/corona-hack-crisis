@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import Context from "../context";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 const FollowUp = () => {
   const [details, setDetails] = useState({
     fever: false,
     breath: false,
-    cough: false,
+    dryCough: false,
+    wetCough: false,
     nose: false,
     temp: false,
     // contact and abroad
@@ -15,9 +16,20 @@ const FollowUp = () => {
   });
 
   const history = useHistory();
+  const { setMessage } = useContext(Context);
+
   const handleSubmit = () => {
     axios.post("/api/userFollow", details);
-    history.push("/");
+    if (details.fever && details.dryCough && details.breath) {
+      setMessage(
+        "You are eligible for testing and have been added to the testing database"
+      );
+    } else {
+      setMessage(
+        "You are not eligible for testing. Please self quarantine until further notice."
+      );
+    }
+    history.push("/message");
   };
 
   return (
@@ -38,7 +50,7 @@ const FollowUp = () => {
           name="temp"
           className="formFields"
           style={{ width: "180px" }}
-          placeholder="Temperature in &#8457"
+          placeholder="Temperature in F"
           value={details.temp}
           onChange={(e) => {
             setDetails({ ...details, temp: e.target.value });
@@ -69,23 +81,34 @@ const FollowUp = () => {
           <span className="checkmark"></span>
         </label>
         <label className="container">
-          Cough
+          Dry Cough
           <input
             type="checkbox"
-            checked={details.cough}
+            checked={details.dryCough}
             onClick={({ target }) => {
-              setDetails({ ...details, cough: target.checked });
+              setDetails({ ...details, dryCough: target.checked });
             }}
           />
           <span className="checkmark"></span>
         </label>
         <label className="container">
-          Have you travelled abroad recently?
+          Wet Cough
           <input
             type="checkbox"
-            checked={details.abroad}
+            checked={details.wetCough}
             onClick={({ target }) => {
-              setDetails({ ...details, abroad: target.checked });
+              setDetails({ ...details, wetCough: target.checked });
+            }}
+          />
+          <span className="checkmark"></span>
+        </label>
+        <label className="container">
+          Shortness of Breath
+          <input
+            type="checkbox"
+            checked={details.breath}
+            onClick={({ target }) => {
+              setDetails({ ...details, breath: target.checked });
             }}
           />
           <span className="checkmark"></span>
