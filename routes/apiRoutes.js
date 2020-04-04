@@ -1,4 +1,10 @@
-const { User, Patient, Advisory } = require("../services/db");
+const {
+  User,
+  Patient,
+  Advisory,
+  Eligibility,
+  Follow,
+} = require("../services/db");
 
 module.exports = (app) => {
   app.get("/api/current_user", async (req, res) => {
@@ -25,6 +31,25 @@ module.exports = (app) => {
       })
       .catch(() => {
         res.send("Error");
+      });
+  });
+
+  app.post("/api/userEligibility", async (req, res) => {
+    Eligibility.create({ ...req.body, userGoogleID: req.user.googleID })
+      .then(() => {
+        res.send("Done");
+      })
+      .catch(() => {
+        res.send("error");
+      });
+  });
+  app.post("/api/userFollow", async (req, res) => {
+    Follow.create({ ...req.body, userGoogleID: req.user.googleID })
+      .then(() => {
+        res.send("Done");
+      })
+      .catch((e) => {
+        res.send("error");
       });
   });
 };

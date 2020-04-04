@@ -18,7 +18,7 @@ const Routes = () => {
         <>
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/handleLogin" component={HandleLogin} />
-          <Route exact path="/" component={Login} />
+          <Route path="/" component={Login} />
         </>
       ) : null}
       <Route path="/adv" component={Advisories} />

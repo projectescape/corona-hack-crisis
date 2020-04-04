@@ -3,8 +3,8 @@ const { DATABASE_URL } = require("../config/keys");
 
 const sequelize = new Sequelize(DATABASE_URL, {
   define: {
-    timestamps: true
-  }
+    timestamps: true,
+  },
 });
 
 sequelize
@@ -12,54 +12,54 @@ sequelize
   .then(() => {
     console.log("Connection has been established successfully.");
   })
-  .catch(err => {
+  .catch((err) => {
     console.error("Unable to connect to the database:", err);
   });
 
 const User = sequelize.define("user", {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   googleID: {
     type: Sequelize.STRING,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
   },
   photo: {
-    type: Sequelize.TEXT
-  }
+    type: Sequelize.TEXT,
+  },
 });
 
 const Patient = sequelize.define("patient", {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   state: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   pincode: {
     type: Sequelize.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
 User.belongsToMany(Patient, { through: "userpatient" });
@@ -68,106 +68,108 @@ Patient.belongsToMany(User, { through: "userpatient" });
 const Advisory = sequelize.define("advisory", {
   title: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   body: {
     type: Sequelize.TEXT,
-    allowNull: false
+    allowNull: false,
   },
   image: {
-    type: Sequelize.TEXT
-  }
+    type: Sequelize.TEXT,
+  },
 });
 
 const Eligibility = sequelize.define("eligibility", {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   age: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   sex: {
     // True for male, false female
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   city: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   state: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
   pincode: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   // Symptoms
   fever: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   breath: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   cough: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   nose: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   temp: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   // contact and abroad
   contactWithPatient: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   abroad: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
-  }
+    allowNull: false,
+  },
 });
 
-Eligibility.belongsTo(User);
+User.hasMany(Eligibility);
 
 const Follow = sequelize.define("follow", {
   fever: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   breath: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   cough: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   nose: {
     type: Sequelize.BOOLEAN,
-    allowNull: false
+    allowNull: false,
   },
   temp: {
     type: Sequelize.INTEGER,
-    allowNull: false
-  }
+    allowNull: false,
+  },
+  contactWithPatient: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+  },
 });
-
 Follow.belongsTo(User);
-
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = { User, Patient, Advisory, Eligibility, Follow };

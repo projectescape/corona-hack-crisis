@@ -55,13 +55,16 @@ const login = () => {
                 </span>
               </div>
               <div>
-                <span className="login100-form-title googleLogo">
+                <a
+                  href="/auth/google"
+                  className="login100-form-title googleLogo"
+                >
                   <img
                     src="images/google-plus.png"
                     className="img-fluid"
                     alt="Responsive image"
                   />
-                </span>
+                </a>
               </div>
 
               <div className="text-center p-t-30">
