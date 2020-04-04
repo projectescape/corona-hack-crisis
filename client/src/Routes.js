@@ -7,6 +7,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Context from "./context";
 import Login from "./components/Login";
 import HandleLogin from "./components/HandleLogin";
+import SignUp from "./components/signup";
 
 const Routes = () => {
   const { profile } = useContext(Context);
@@ -15,11 +16,13 @@ const Routes = () => {
     <Switch>
       {profile === null ? (
         <>
-          <Route path="/handleLogin" component={HandleLogin} />
-          <Route path="/" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/handleLogin" component={HandleLogin} />
+          <Route exact path="/" component={Login} />
         </>
       ) : null}
       <Route path="/adv" component={Advisories} />
+
       <Route path="/checkContact" component={ContactDetail} />
       <Route path="/testingEligibility" component={TestingEligibility} />
       <Route path="/followUp" component={FollowUp} />
