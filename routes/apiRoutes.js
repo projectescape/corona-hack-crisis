@@ -1,4 +1,4 @@
-const { User, Patient } = require("../services/db");
+const { User, Patient, Advisory } = require("../services/db");
 
 module.exports = (app) => {
   app.get("/api/current_user", async (req, res) => {
@@ -9,5 +9,9 @@ module.exports = (app) => {
   app.get("/api/patient", async (req, res) => {
     const patients = await Patient.findAll();
     res.json(patients);
+  });
+  app.get("/api/advisory", async (req, res) => {
+    const advisories = await Advisory.findAll();
+    res.json(advisories);
   });
 };

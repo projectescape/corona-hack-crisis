@@ -9,6 +9,8 @@ const reducer = (state, action) => {
       return { ...state, profile: action.payload };
     case "fetchPatient":
       return { ...state, patient: action.payload };
+    case "fetchAdvisory":
+      return { ...state, advisory: action.payload };
     default:
       return state;
   }
@@ -17,6 +19,7 @@ export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     profile: null,
     patient: null,
+    advisory: null,
   });
 
   const fetchProfile = async () => {
@@ -28,9 +31,15 @@ export const Provider = ({ children }) => {
     const patient = await axios.get("/api/patient");
     dispatch({ type: "fetchPatient", payload: patient.data });
   };
+  const fetchAdvisory = async () => {
+    const advisory = await axios.get("/api/advisory");
+    dispatch({ type: "fetchAdvisory", payload: advisory.data });
+  };
 
   return (
-    <Context.Provider value={{ ...state, fetchProfile, fetchPatient }}>
+    <Context.Provider
+      value={{ ...state, fetchProfile, fetchPatient, fetchAdvisory }}
+    >
       {children}
     </Context.Provider>
   );

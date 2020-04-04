@@ -1,4 +1,4 @@
-const { Patient } = require("./db");
+const { Patient, Advisory } = require("./db");
 
 (async () => {
   await Patient.findOrCreate({
@@ -19,6 +19,21 @@ const { Patient } = require("./db");
       city: "City 2",
       state: "State 2",
       pincode: 222222,
+    },
+  });
+
+  Advisory.findOrCreate({
+    where: { id: 1 },
+    defaults: {
+      title: "Advisory 1",
+      body: "lorem Ipsum dotor",
+    },
+  });
+  Advisory.findOrCreate({
+    where: { id: 2 },
+    defaults: {
+      title: "Advisory 2",
+      body: "lorem Ipsum dotor",
     },
   });
 })();
