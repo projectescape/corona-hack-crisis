@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Nav = () => {
-  const [toggle, fToggle] = useState("active");
+  const [toggle, fToggle] = useState("inactive");
   return (
-    <nav id="sidebar" className="inactive">
+    <nav id="sidebar" className={toggle}>
       <div className="custom-menu">
-        <button type="button" id="sidebarCollapse" className="btn btn-primary">
+        <button
+          type="button"
+          id="sidebarCollapse"
+          className="btn btn-primary"
+          onClick={() => {
+            //alert("fghjk");
+            if (toggle === "active") fToggle("inactive");
+            else fToggle("active");
+          }}
+        >
           <i className="fa fa-bars"></i>
           <span className="sr-only">Toggle Menu</span>
         </button>
