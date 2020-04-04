@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Context from "../context";
 
 const Details = () => {
   const { patient, fetchPatient } = useContext(Context);
+
+  const [checkList, setCheckList] = useState({});
 
   useEffect(() => {
     if (patient === null) fetchPatient();
@@ -33,11 +35,20 @@ const Details = () => {
             </p>
             <div className="form-check" style={{ float: "right" }}>
               <input
+                checked={checkList[patient.id] ? true : false}
                 className="form-check-input position-static"
                 type="checkbox"
                 id="blankCheckbox"
                 value="option1"
                 aria-label="..."
+                onClick={({ target }) => {
+                  if (target.checked) {
+                    setCheckList({ ...checkList, [patient.id]: true });
+                  } else {
+                    delete checkList[patient.id];
+                    setCheckList({ ...checkList });
+                  }
+                }}
               />
             </div>
           </div>
@@ -62,9 +73,17 @@ const Details = () => {
         {renderCards()}
 
         <div className="sticky" style={{ align: "center" }}>
-          <button type="button" className="btn btn-light buttonMy">
-            Submit
-          </button>
+          {Object.keys(checkList).length === 0 ? null : (
+            <button
+              type="button"
+              className="btn btn-light buttonMy"
+              onClick={() => {
+                console.log(checkList);
+              }}
+            >
+              Submit
+            </button>
+          )}
         </div>
       </div>
     </div>
