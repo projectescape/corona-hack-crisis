@@ -35,10 +35,22 @@ export const Provider = ({ children }) => {
     const advisory = await axios.get("/api/advisory");
     dispatch({ type: "fetchAdvisory", payload: advisory.data });
   };
+  const submitPatient = (list) => {
+    axios.post(
+      "/api/userpatient",
+      Object.keys(list).map((e) => parseInt(e))
+    );
+  };
 
   return (
     <Context.Provider
-      value={{ ...state, fetchProfile, fetchPatient, fetchAdvisory }}
+      value={{
+        ...state,
+        fetchProfile,
+        fetchPatient,
+        fetchAdvisory,
+        submitPatient,
+      }}
     >
       {children}
     </Context.Provider>

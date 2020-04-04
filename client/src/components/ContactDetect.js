@@ -1,14 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import Context from "../context";
+import { useHistory } from "react-router-dom";
 
 const Details = () => {
-  const { patient, fetchPatient } = useContext(Context);
+  const { patient, fetchPatient, submitPatient } = useContext(Context);
 
   const [checkList, setCheckList] = useState({});
 
   useEffect(() => {
     if (patient === null) fetchPatient();
   }, [patient]);
+
+  const history = useHistory();
+
+  const handleSubmit = () => {
+    submitPatient(checkList);
+    history.push("/testingEligibility");
+  };
 
   const renderCards = () => {
     if (patient === null) return null;
@@ -78,7 +86,7 @@ const Details = () => {
               type="button"
               className="btn btn-light buttonMy"
               onClick={() => {
-                console.log(checkList);
+                handleSubmit();
               }}
             >
               Submit

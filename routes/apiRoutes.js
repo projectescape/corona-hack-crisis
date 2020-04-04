@@ -10,8 +10,21 @@ module.exports = (app) => {
     const patients = await Patient.findAll();
     res.json(patients);
   });
+
   app.get("/api/advisory", async (req, res) => {
     const advisories = await Advisory.findAll();
     res.json(advisories);
+  });
+
+  app.post("/api/userpatient", async (req, res) => {
+    User.findByPk(req.user.googleID)
+      .then((user) => {
+        user.addPatients(req.body).then(() => {
+          res.send("Done");
+        });
+      })
+      .catch(() => {
+        res.send("Error");
+      });
   });
 };
