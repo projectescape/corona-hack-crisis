@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/projectescape/corona-hack-crisis#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

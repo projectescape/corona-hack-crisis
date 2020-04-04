@@ -20,7 +20,8 @@ passport.use(
       proxy: true
     },
     async (accessToken, refreshToken, profile, done) => {
-      const [user, created] = await User.findOrCreate({
+      //   const [user, created] =
+      await User.findOrCreate({
         where: { googleID: profile.id },
         defaults: {
           firstName: profile.name.givenName,
@@ -29,8 +30,8 @@ passport.use(
           photo: profile.photos[0].value
         }
       });
-      console.log("created : ", created);
-      console.log("User : ", user);
+      //   console.log("created : ", created);
+      //   console.log("User : ", user);
       done(null, { googleID: profile.id });
     }
   )

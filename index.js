@@ -11,7 +11,7 @@ require("./services/passport");
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 
@@ -21,7 +21,7 @@ app.use(
   cookieSession({
     // in millisecond
     maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [cookieKey]
+    keys: [cookieKey],
   })
 );
 
@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/authRoutes")(app);
+require("./routes/apiRoutes")(app);
 
 // For deployment setup
 if (process.env.NODE_ENV === "production") {
