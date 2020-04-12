@@ -38,22 +38,38 @@ const Nav = () => {
           </div>
         </div>
         <ul className="list-unstyled components mb-5 vList">
-          <li className="active">
+          <li  onClick={() => {
+            //alert("fghjk");
+            if (toggle === "active") fToggle("inactive");
+            else fToggle("active");
+          }}>
             <Link to="/adv">
               <span className="fa fa-star mr-3"> </span> Advisories
             </Link>
           </li>
-          <li>
+          <li  onClick={() => {
+            //alert("fghjk");
+            if (toggle === "active") fToggle("inactive");
+            else fToggle("active");
+          }}>
             <Link to="/checkContact">
               <span className="fa fa-users mr-3"></span> Check Contact
             </Link>
           </li>
-          <li>
+          <li  onClick={() => {
+            //alert("fghjk");
+            if (toggle === "active") fToggle("inactive");
+            else fToggle("active");
+          }}>
             <Link to="/testingEligibility">
               <span className="fa fa-medkit mr-3"></span> Testing Eligibility{" "}
             </Link>
           </li>
-          <li>
+          <li  onClick={() => {
+            //alert("fghjk");
+            if (toggle === "active") fToggle("inactive");
+            else fToggle("active");
+          }}>
             <Link to="/followUp">
               <span className="fa fa-suitcase mr-3"></span> Follow up
             </Link>

@@ -39,7 +39,7 @@ const Advisories = () => {
           Advisories
         </h3>
         <p style={{ fontWeight: "bold", color: "black" }}>
-          Corona Virus Live Updates
+          Corona Virus Live Updates direct from the government.
         </p>
         {renderCards()}
       </div>
